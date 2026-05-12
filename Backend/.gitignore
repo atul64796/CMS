@@ -1,0 +1,146 @@
+# ========================================
+# 📦 Node.js & npm
+# ========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+
+# ========================================
+# 🧠 Environment Files
+# ========================================
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+.env.staging
+.env.example
+
+# ========================================
+# ⚙️ Build & Output
+# ========================================
+dist/
+build/
+.cache/
+.next/
+out/
+coverage/
+tmp/
+temp/
+.DS_Store
+
+# ========================================
+# 🖥️ Frontend (React / Vite)
+# ========================================
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env
+frontend/.env.local
+frontend/.DS_Store
+
+# ========================================
+# 🧠 Backend (Express / Node)
+# ========================================
+backend/node_modules/
+backend/dist/
+backend/.env
+backend/.env.local
+backend/uploads/
+backend/temp/
+backend/logs/
+backend/.DS_Store
+
+# ========================================
+# 🗃️ Logs & Databases
+# ========================================
+logs/
+*.log
+*.csv
+*.sqlite
+*.sqlite3
+*.db
+dump.rdb
+*.pid
+pids/
+*.seed
+*.tgz
+
+# ========================================
+# 🧰 IDE / OS / Misc
+# ========================================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+Thumbs.db
+.DS_Store
+*.iml
+.project
+.settings/
+.history/
+*.tmp
+*.bak
+*.orig
+
+# ========================================
+# 🧪 Testing
+# ========================================
+/coverage/
+*.spec.js
+*.test.js
+*.spec.ts
+*.test.ts
+__tests__/
+jest-cache/
+jest-temp/
+.cypress/
+
+# ========================================
+# 📸 Image / Media Cache
+# ========================================
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.svg
+!src/assets/**
+!frontend/src/assets/**
+!backend/src/assets/**
+
+# ========================================
+# 🔐 Security
+# ========================================
+*.pem
+*.key
+*.crt
+*.csr
+*.p12
+*.pfx
+keys/
+secrets/
+private/
+config/secrets.json
+config/keys.json
+config/*.pem
+
+# ========================================
+# 🧾 Environment specific
+# ========================================
+.env.test
+.env.prod
+.env.stage
+.env.production
+.env.development
+
+
+.env
+Backend/.env

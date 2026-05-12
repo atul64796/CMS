@@ -1,0 +1,40 @@
+# Ignore build outputs
+build/
+dist/
+.cache/
+coverage/
+
+# Ignore dependency folders
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Ignore environment files
+.env
+.env.local
+.env.production
+.env.development
+
+# Ignore logs
+*.log
+logs/
+backend/logs/
+
+# Ignore Git & OS files
+.git/
+.DS_Store
+
+# Ignore package lock files (optional)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Ignore generated images / uploads
+uploads/
+backend/uploads/
+frontend/public/images/
+
+# Ignore compiled React files
+frontend/build/
+frontend/dist/
+clear
