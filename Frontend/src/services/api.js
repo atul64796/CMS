@@ -95,6 +95,9 @@ export const downloadZip = (assignmentId) =>
     responseType: "blob"
   });
 
+  // Get all assignments for student
+export const getStudentAssignments = () =>
+  assignmentAPI.get("/studentAssignments");
 
 // ================= ADMIN API =================
 const adminAPI = axios.create({
