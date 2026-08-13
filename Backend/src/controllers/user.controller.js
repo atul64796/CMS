@@ -50,25 +50,14 @@ const registerUser = asyncHandler(async (req, res) => {
 
   console.log(req.file);
 
-  const avatarLocalPath = req.file?.path;
-
-  if (!avatarLocalPath) {
-    throw new ApiError(400, 'avatar file is required');
-  }
-
-  //upload them to cloudinary,avatar
-  const avatar = await uploadOnCloudinary(avatarLocalPath);
-
-  if (!avatar) {
-    throw new ApiError(400, 'Avatar upload failed');
-  }
+  
 
   const user = await User.create({
     fullname,
     email,
     password,
     rollNumber,
-    avatar: avatar.url,
+    avatar: "",
   });
 
   //generate refresh token and
@@ -78,7 +67,11 @@ const registerUser = asyncHandler(async (req, res) => {
 
   if (!createdUser) throw new ApiError(400, 'User registration failed!..');
 
- await createActivityLog(req, 'REGISTER', `User registered with email ${email}`);
+await createActivityLog(
+  { user, ip: req.ip },
+  'REGISTER',
+  `User registered with email ${email}`
+);
 
   //return  final response user created sucessfully in json format
   return res.status(201).json(new ApiResponse(200, createdUser, 'User registered successfully'));
@@ -138,7 +131,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   const options = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: false,
     sameSite: "lax",
   };
 
@@ -152,7 +145,6 @@ const loginUser = asyncHandler(async (req, res) => {
         200,
         {
           user: loggedinUser,
-          accessToken,
         },
         "LOGIN_SUCCESS"
       )

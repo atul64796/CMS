@@ -6,7 +6,8 @@ const client = new UploadClient({
 });
 
 // 🔥 your CDN domain
-const CDN_DOMAIN = "https://4ntns1yzxl.ucarecd.net";
+const CDN_DOMAIN = "https://1tj3erng93.ucarecd.net";
+
 
 export const uploadFileToUploadcare = async (localFilePath, fileName) => {
   try {

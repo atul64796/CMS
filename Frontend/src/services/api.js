@@ -94,7 +94,9 @@ export const downloadZip = (assignmentId) =>
     responseType: "blob"
   });
 
-
+  // Get all assignment of student
+export const getStudentAssignments = () =>
+  assignmentAPI.get("/studentAssignments");
 
 
 // Admin Api

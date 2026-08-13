@@ -8,7 +8,8 @@ import { createAssignment,
     getNotifications,
     getAllAssignment,
     downloadAllSubmission,
-    getMyAssignments 
+    getMyAssignments,
+    getStudentAssignments
 } from "../controllers/assignment.controller.js";
 
 const router = Router();
@@ -49,6 +50,9 @@ router.get("/submission/:assignmentId",
     verifyJwt,
     getAllAssignment
 )
+//Get all assignment of student
+router.route("/studentAssignments")
+    .get(verifyJwt, getStudentAssignments);
 
 router.get("/download-zip/:assignmentId",
     verifyJwt,

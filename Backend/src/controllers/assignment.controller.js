@@ -368,7 +368,7 @@ const getNotifications = asyncHandler(async (req, res) => {
 });
 
 //GET ALL ASSIGNMENT
-
+//for teacher to get all assignment and their submission
 const getAllAssignment = asyncHandler(async (req,res) => {
     
     const {assignmentId } = req.params;
@@ -396,6 +396,64 @@ const getAllAssignment = asyncHandler(async (req,res) => {
 
 })
 
+//get all assignment for student
+// GET ALL CURRENT ASSIGNMENTS FOR STUDENT
+const getStudentAssignments = asyncHandler(async (req, res) => {
+
+    if (req.user.role !== "student") {
+        throw new ApiError(
+            403,
+            "Only students can access assignments"
+        );
+    }
+
+    const assignments = await Assignment.find({
+        deadline: {
+            $gte: new Date()
+        }
+    })
+    .populate(
+        "createdBy",
+        "fullname avatar"
+    )
+    .sort({
+        createdAt: -1
+    });
+
+    const studentId = req.user._id.toString();
+
+    const studentAssignments = assignments.map(
+        (assignment) => {
+
+            const isSubmitted =
+                assignment.submissions.some(
+                    (submission) =>
+                        submission.student.toString() ===
+                        studentId
+                );
+
+            return {
+                _id: assignment._id,
+                title: assignment.title,
+                description: assignment.description,
+                deadline: assignment.deadline,
+                fileType: assignment.fileType,
+                maxSize: assignment.maxSize,
+                createdAt: assignment.createdAt,
+                createdBy: assignment.createdBy,
+                isSubmitted
+            };
+        }
+    );
+
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            studentAssignments,
+            "Assignments fetched successfully"
+        )
+    );
+});
 
 
 const downloadAllSubmission = asyncHandler(async (req, res) => {
@@ -491,5 +549,6 @@ export {
     getNotifications,
     getAllAssignment,
     downloadAllSubmission,
-    getMyAssignments
+    getMyAssignments,
+    getStudentAssignments
 };
