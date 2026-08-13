@@ -9,7 +9,7 @@ import Profile from "./page/UserProfile/Profile.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import PublicRoute from "./components/PublicRoute.jsx";
 import Navbar from "./components/Navbar.jsx";
-import UpdateAccount from "./page/update/updateAccount.jsx";
+import UpdateAccount from "./page/update/UpdateAccount.jsx";
 import UpdatePassword from "./page/update/UpdatePassword.jsx";
 
 // ✅ Admin imports
