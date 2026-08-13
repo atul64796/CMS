@@ -129,11 +129,15 @@ const loginUser = asyncHandler(async (req, res) => {
   // ✅ remove sensitive data AFTER check
   const loggedinUser = await User.findById(finduser._id).select("-password -refreshToken");
 
-  const options = {
-    httpOnly: true,
-    secure: false,
-    sameSite: "lax",
-  };
+
+  // ✅ Dynamic cookie configuration for production vs. development
+const isProduction = process.env.NODE_ENV === "production";
+
+const options = {
+  httpOnly: true,
+  secure: isProduction, // Must be true on HTTPS (Render/Vercel)
+  sameSite: isProduction ? "none" : "lax", // "none" allows cross-domain cookies
+};
 
   // ✅ response
   res
@@ -181,11 +185,16 @@ const logoutUser = asyncHandler(async (req, res) => {
     }
   );
 
-  const options = {
-    httpOnly: true,
-    secure: false,
-    sameSite: 'lax'
-  };
+  // ✅ Dynamic cookie configuration for production vs. development
+const isProduction = process.env.NODE_ENV === "production";
+
+const options = {
+  httpOnly: true,
+  secure: isProduction, // Must be true on HTTPS (Render/Vercel)
+  sameSite: isProduction ? "none" : "lax", // "none" allows cross-domain cookies
+};
+
+
   return res
     .status(200)
     .clearCookie('accessToken', options)
