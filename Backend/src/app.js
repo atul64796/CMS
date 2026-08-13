@@ -11,31 +11,7 @@ import "./services/cron/reminderCron.js";
 dotenv.config();
 const app = express();
 
-// Define allowed origins
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://cms-silk-gamma.vercel.app",
-  process.env.CLIENT_URL, // In case you add custom domains later
-].filter(Boolean); // Filters out undefined values
-
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like Postman or mobile apps)
-      if (!origin) return callback(null, true);
-
-      // Clean up potential trailing slashes from incoming origins
-      const sanitizedOrigin = origin.replace(/\/$/, "");
-
-      if (allowedOrigins.includes(sanitizedOrigin) || allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      } else {
-        return callback(new Error(`CORS policy blocked access from: ${origin}`));
-      }
-    },
-    credentials: true,
-  })
-);
+app.use(cors({ origin: 'https://cms-silk-gamma.vercel.app' }));
 
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
